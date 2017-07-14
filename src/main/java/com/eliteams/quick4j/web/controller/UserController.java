@@ -1,9 +1,9 @@
 package com.eliteams.quick4j.web.controller;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+import com.eliteams.quick4j.web.model.User;
+import com.eliteams.quick4j.web.security.PermissionSign;
+import com.eliteams.quick4j.web.security.RoleSign;
+import com.eliteams.quick4j.web.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -16,10 +16,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.eliteams.quick4j.web.model.User;
-import com.eliteams.quick4j.web.security.PermissionSign;
-import com.eliteams.quick4j.web.security.RoleSign;
-import com.eliteams.quick4j.web.service.UserService;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * 用户控制器
@@ -59,6 +60,7 @@ public class UserController {
             final User authUserInfo = userService.selectByUsername(user.getUsername());
             request.getSession().setAttribute("userInfo", authUserInfo);
         } catch (AuthenticationException e) {
+            e.printStackTrace();
             // 身份验证失败
             model.addAttribute("error", "用户名或密码错误 ！");
             return "login";
