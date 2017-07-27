@@ -1,11 +1,11 @@
 package junit4;
 
+import com.eliteams.quick4j.web.interceptors.proxy.DynamicProxyHandler;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import proxy.handler.ProxyHandler;
 import wife.bean.BatTaskCfg;
 import wife.service.impl.TaskTimeLineSVImpl;
 import wife.service.interfaces.ITaskTimeLineSV;
@@ -50,7 +50,7 @@ public class Junit4Test {
 
     @Test
     public void testCalculateTaskWorkTime() throws Exception {
-        ITaskTimeLineSV iTaskTimeLineSV = (ITaskTimeLineSV) Proxy.newProxyInstance(ITaskTimeLineSV.class.getClassLoader(), new Class[]{ITaskTimeLineSV.class}, new ProxyHandler(new TaskTimeLineSVImpl()));
+        ITaskTimeLineSV iTaskTimeLineSV = (ITaskTimeLineSV) Proxy.newProxyInstance(ITaskTimeLineSV.class.getClassLoader(), new Class[]{ITaskTimeLineSV.class}, new DynamicProxyHandler(new TaskTimeLineSVImpl(), null));
         //我需要动态代理IOrd4EsbCSV里面的每一个方法
         List<BatTaskCfg> batTaskCfgList = iTaskTimeLineSV.getBatTaskCfgList(null, null, null, null);
         List<List<Integer>> timeLine = iTaskTimeLineSV.batTaskCfgTransferTimeLine(batTaskCfgList);

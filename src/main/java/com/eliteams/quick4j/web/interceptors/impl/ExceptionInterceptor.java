@@ -2,6 +2,8 @@ package com.eliteams.quick4j.web.interceptors.impl;
 
 import com.eliteams.quick4j.web.interceptors.exception.AcceptableException;
 import com.eliteams.quick4j.web.interceptors.interfaces.IInterceptor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.lang.reflect.Method;
 
@@ -18,6 +20,7 @@ import java.lang.reflect.Method;
  * 2017/7/14     xuxiao          v1.1.0               修改原因
  */
 public class ExceptionInterceptor implements IInterceptor{
+    private static final Log log = LogFactory.getLog(ExceptionInterceptor.class);
     IInterceptor interceptor = null;
 
     public ExceptionInterceptor(){
@@ -30,6 +33,7 @@ public class ExceptionInterceptor implements IInterceptor{
     @Override
     public void beforeInvoke(Object proxy, Method method, Object[] args) throws AcceptableException, Exception {
         // TODO: 2017/7/14  链式创建连接器时，谁在先就先执行谁的拦截方法
+        log.debug("异常拦截器前置任务");
         if(this.interceptor!=null){
             this.interceptor.beforeInvoke(proxy,method,args);
         }
