@@ -26,6 +26,6 @@ public class JedisTest extends TestSupport {
 
     @Test
     public void testGet() {
-        System.out.printf(redisCache.get("anchor"));
+        System.out.println("\n查询结果::"+redisCache.get("anchor"));
     }
 }
