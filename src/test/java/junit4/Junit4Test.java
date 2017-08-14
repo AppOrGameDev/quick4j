@@ -59,7 +59,8 @@ public class Junit4Test {
 
     @Test
     public void test2() throws Exception {
-        System.out.println("method2");
+        Son son = new Son();
+        son.sayName();
     }
 
 
